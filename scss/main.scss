@@ -1,5 +1,6 @@
 @import "../css/reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Russo+One&display=swap');
 
 $color1: #FFBC42;
 $color2: #D81159;
@@ -7,28 +8,125 @@ $color3: #8F2D56;
 $color4: #218380;
 $fontOpen:'Open Sans', sans-serif;
 $fontRoboto:'Roboto', sans-serif;
+$fontFredoka: 'Fredoka One', cursive;
+$fontRusso: 'Russo One', sans-serif;
+$fontPacifico: 'Pacifico', cursive;
 
 
 @mixin tekst_color {
   color: $color4;
-  text-shadow: 0px 3px 0px $color3;
+  text-shadow: 1px 2px 0px $color3;
   font-family: $fontOpen;
+  font-weight: bold;
 
 }
 
 body{
   background-color: $color1;
   @include tekst_color;
+  height: 100vh;
 
 }
 .main-container{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  //margin: 0 auto;
+
+
+
+}
+.main{
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  //width: 1024px;
+  //height: 768px;
+  width: 800px;
+  height: 600px;
+
+
+  max-width: 1352px;
+  margin: auto;
+  outline: 5px dotted $color2;
+  max-height: 100vh;
+  //background-image: url("../images/doxie-background-pattern_1319-496.jpg");
+  //background-size: cover;
+
 }
 
-header{
+.main::before{
+  content: "";
+  max-width: 1352px;
+  margin: auto;
+  max-height: 100vh;
+  background-image: url("../images/doxie-background-pattern_1319-496.jpg");
+  background-size: auto;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+  height: inherit;
+  width: inherit;
+}
+
+
+.title{
+  display: flex;
+  justify-content: center;
+
   h1{
-    font-size: 3em;
+    font-size: 70px;
     font-weight: bold;
+    margin: 10px;
+    font-family: "Russo One",sans-serif;
+  }
+}
+
+.main-menu{
+  min-width: 600px;
+  min-height: 450px;
+  margin: 0 auto;
+}
+
+
+
+.header-main-menu{
+
+  h2{
+    text-align: center;
+    font-size: 70px;
+    padding: 30px;
+    font-family: "Pacyfico", cursive;
+  }
+}
+.body-main-menu{
+  display: flex;
+  justify-content: center;
+  ul{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    li{
+      text-align: center;
+      margin: 25px;
+      font-size: 50px;
+      a{
+        text-decoration: none;
+        @include tekst_color;
+        font-family: 'Fredoka One', cursive;
+
+      }
+      a:hover{
+        color: $color2;
+        font-size: 52px;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 3px dotted $color2;
+        text-shadow: 2px 3px 0px $color3;
+      }
+    }
+
   }
 }
