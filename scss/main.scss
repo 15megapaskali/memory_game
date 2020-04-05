@@ -1,4 +1,5 @@
 @import "../css/reset.css";
+@import "../css/bootstrap-grid.css";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Russo+One&display=swap');
 
@@ -46,22 +47,17 @@ body{
   //height: 768px;
   width: 800px;
   height: 600px;
-
-
   max-width: 1352px;
   margin: auto;
   outline: 5px dotted $color2;
   max-height: 100vh;
-  //background-image: url("../images/doxie-background-pattern_1319-496.jpg");
-  //background-size: cover;
-
 }
 
 .main::before{
   content: "";
-  max-width: 1352px;
+
   margin: auto;
-  max-height: 100vh;
+
   background-image: url("../images/doxie-background-pattern_1319-496.jpg");
   background-size: auto;
   opacity: 0.5;
@@ -129,4 +125,96 @@ body{
     }
 
   }
+}
+
+//game style
+.back-btn{
+  background-color: $color1; /* Green */
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  outline: 2px dotted $color2;
+  @include tekst_color;
+  transition: 0.3s;
+  cursor: pointer;
+  margin:2px
+
+}
+
+.back-btn:hover{
+  background-color: $color4; /* Green */
+  border: none;
+  padding: 7px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  outline: 2px dotted $color2;
+  @include tekst_color;
+  color: $color1;
+
+}
+
+.game{
+display: none;
+}
+.game-content{
+  width: 720px;
+  height: 540px;
+
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+  width: 320px;
+  height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+}
+
+.img{
+  margin: 5px;
+  border: 1px solid $color1;
+  border-radius: 5%;
+  width: 200px;
+  height: 200px;
 }
