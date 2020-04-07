@@ -45,12 +45,12 @@ body{
   align-items: center;
   //width: 1024px;
   //height: 768px;
-  width: 800px;
+  width: 1300px;
   height: 600px;
-  max-width: 1352px;
-  margin: auto;
+  max-width: 1366px;
+  margin: 10px auto;
   outline: 5px dotted $color2;
-  max-height: 100vh;
+  //max-height: 100vh;
 }
 
 .main::before{
@@ -129,13 +129,15 @@ body{
 
 //game style
 .back-btn{
+  position: absolute;
+  top: 45px;
   background-color: $color1; /* Green */
   border: none;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 14px;
   outline: 2px dotted $color2;
   @include tekst_color;
   transition: 0.3s;
@@ -151,7 +153,7 @@ body{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: 16px;
   outline: 2px dotted $color2;
   @include tekst_color;
   color: $color1;
@@ -162,9 +164,18 @@ body{
 display: none;
 }
 .game-content{
-  width: 720px;
-  height: 540px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 840px;
+  height: 580px;
 
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -173,13 +184,16 @@ display: none;
   perspective: 1000px;
 }
 /* flip the pane when hovered */
-.flip-container:hover .flipper, .flip-container.hover .flipper {
+.flip-container.hover .flipper {
   transform: rotateY(180deg);
 }
 
+
+
 .flip-container, .front, .back {
-  width: 320px;
-  height: 480px;
+
+  width: 180px;
+  height: 180px;
 }
 
 /* flip speed goes here */
@@ -212,9 +226,21 @@ display: none;
 }
 
 .img{
-  margin: 5px;
+
   border: 1px solid $color1;
   border-radius: 5%;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
+}
+
+.card-list{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  li{
+
+    margin: 0 10px 5px 10px;
+
+  }
 }

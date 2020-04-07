@@ -2,7 +2,6 @@
 var path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
     devtool: 'eval-source-map',
     watch: true,
@@ -11,13 +10,11 @@ module.exports = {
         main: path.join(__dirname, 'js', 'app.js'),
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: '[name].bundle.js'
+        path: path.join(__dirname, 'dist')
     },
     devServer: {
         port: 4500,
         disableHostCheck: true,
-        contentBase: path.join(__dirname, "dist"),
         compress: true,
         historyApiFallback: true
     },
