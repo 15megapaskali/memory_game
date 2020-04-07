@@ -73,25 +73,26 @@ function tableRandomNumbers() {
 //drugi argument dla .on
 let card1 = 0;
 let card2 = 0;
-
+let count = 0;
 $('.game').on('click', '.flip-container', function(){
-
+    count += 1;
     this.classList.toggle('hover');
     $(this).find('.back').find('img').addClass('uncovered');
     console.log($(this).find('.back').find('img').attr('alt'));
     let atrybut = $(this).find('.back').find('img').attr('alt');
     // let numItems = $('.hover').length;
-    if (numItems === 1){
+    if (count === 1){
         card1 = atrybut;
     }
-    if (numItems === 2 ){
+    if (count === 2 ){
         card2 = atrybut;
-        card1 === card2 ? alert('brawo') : null
+        this.classList.add('hover');
+        card1 === card2 ? alert('brawo') : null;
     }
-    if (numItems > 2){
+    if (count > 2){
         $('.flip-container').removeClass('hover');
         $('.flip-container').find('.back').find('img').removeClass('uncovered');
-
+        count = 0;
 
     }
 
