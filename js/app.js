@@ -6,7 +6,9 @@ const $exitBtn = $('#exit-btn');
 const $setCats = $('#set-cats')
 
 const $containerGame = $('.container');
-const $cardList =$('.card-list')
+const $cardList =$('.card-list');
+
+
 
 $exitBtn.click(()=>{
     window.open('', '_self', ''); //bug fix
@@ -19,12 +21,11 @@ $optionsBtn.click(()=>{
 })
 
 $setCats.click(()=>{
+    $('.container').empty();
     $('.options').css("display","none");
     score = 0;
     count = 0;
-    const $ul = $(`<ul class="card-list">
-
-                    </ul>`)
+    const $ul = $(`<ul class="card-list"></ul>`)
     $containerGame.append($ul);
     $cardList.empty();
     console.log("działa klik");
@@ -33,6 +34,7 @@ $setCats.click(()=>{
     $('.main-menu').css("display","none");
     $('.game').css("display","block");
     LosowanieIWklejanie(catTable)
+
 })
 
 
@@ -79,18 +81,17 @@ function LosowanieIWklejanie(tableZdjec){
                     </div>
         </li>`)
 
-        $cardList.append($card)
+        $('.card-list').append($card)
 
     })
 }
 
 
 $newGameBtn.click(()=>{
+    $('.container').empty();
     score=0;
     count = 0;
-    const $ul = $(`<ul class="card-list">
-
-                    </ul>`)
+    const $ul = $(`<ul class="card-list"></ul>`)
     $containerGame.append($ul);
     $cardList.empty();
     console.log("działa klik");
@@ -98,7 +99,7 @@ $newGameBtn.click(()=>{
     $(".theend").css("display","none")
     $('.main-menu').css("display","none");
     $('.game').css("display","block");
-    LosowanieIWklejanie(dogsTable);
+    LosowanieIWklejanie(dogsTable)
 
 })
 

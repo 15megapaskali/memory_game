@@ -200,14 +200,16 @@ display: none;
 .flipper {
   transition: 0.6s;
   transform-style: preserve-3d;
-
+  -webkit-transform-style: preserve-3d;
   position: relative;
+
+
 }
 
 /* hide back of pane during swap */
 .front, .back {
   backface-visibility: hidden;
-
+  -webkit-backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -286,3 +288,4 @@ display: none;
 .theend{
   display: none;
 }
+
