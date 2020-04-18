@@ -6,23 +6,22 @@ const $exitBtn = $('#exit-btn');
 const $setCats = $('#set-cats')
 
 const $containerGame = $('.container');
-const $cardList =$('.card-list');
+const $cardList = $('.card-list');
 
 
-
-$exitBtn.click(()=>{
+$exitBtn.click(() => {
     window.open('', '_self', ''); //bug fix
     window.close();
 })
 
-$optionsBtn.click(()=>{
-    $('.main-menu').css("display","none");
-    $('.options').css("display","block");
+$optionsBtn.click(() => {
+    $('.main-menu').css("display", "none");
+    $('.options').css("display", "block");
 })
 
-$setCats.click(()=>{
+$setCats.click(() => {
     $('.container').empty();
-    $('.options').css("display","none");
+    $('.options').css("display", "none");
     score = 0;
     count = 0;
     const $ul = $(`<ul class="card-list"></ul>`)
@@ -31,13 +30,11 @@ $setCats.click(()=>{
     console.log("działa klik");
     scoreEl.innerText = 0;
 
-    $('.main-menu').css("display","none");
-    $('.game').css("display","block");
+    $('.main-menu').css("display", "none");
+    $('.game').css("display", "block");
     LosowanieIWklejanie(catTable)
 
 })
-
-
 
 
 const dogsTable = [
@@ -64,9 +61,9 @@ const catTable = [
     "./images/k10.jpg",
 ]
 
-function LosowanieIWklejanie(tableZdjec){
-    let paryliczb = tableRandomNumbers();
-    paryliczb.map((e,i)=>{
+function LosowanieIWklejanie(tableZdjec,ilosc) {
+    let paryliczb = tableRandomNumbers(ilosc);
+    paryliczb.map((e, i) => {
         const $card = $(`
         <li>
             <div class="flip-container">
@@ -75,7 +72,7 @@ function LosowanieIWklejanie(tableZdjec){
                                 <img src="./images/reversecard.jpg" alt="reverse" class="img">
                             </div>
                             <div class="back">
-                                <img src="${tableZdjec[e-1]}" alt="${e}" class="img">
+                                <img src="${tableZdjec[e - 1]}" alt="${e}" class="img">
                             </div>
                         </div>
                     </div>
@@ -86,44 +83,49 @@ function LosowanieIWklejanie(tableZdjec){
     })
 }
 
-
-$newGameBtn.click(()=>{
+function NewGame(level) {
     $('.container').empty();
-    score=0;
+    $('.options').css("display", "none");
+    score = 0;
     count = 0;
     const $ul = $(`<ul class="card-list"></ul>`)
     $containerGame.append($ul);
     $cardList.empty();
     console.log("działa klik");
     scoreEl.innerText = 0;
-    $(".theend").css("display","none")
-    $('.main-menu').css("display","none");
-    $('.game').css("display","block");
-    LosowanieIWklejanie(dogsTable)
+    $(".theend").css("display", "none")
+    $('.main-menu').css("display", "none");
+    $('.game').css("display", "block");
+    LosowanieIWklejanie(dogsTable,level)
+}
+
+
+$newGameBtn.click(() => {
+  NewGame(6)
 
 })
 
 
-
-$(".back-btn").click(()=>{
-    $('.game').css("display","none");
-    $('.main-menu').css("display","block")
+$(".back-btn").click(() => {
+    $('.game').css("display", "none");
+    $('.main-menu').css("display", "block");
+    $('.options').css("display","none")
 
 })
 
 
-function tableRandomNumbers() {
+function tableRandomNumbers(ilosc) {
     const min = 1;
-    const max = 6;
+    const max = ilosc;
     const arr1 = [];
-    while(arr1.length < 6){
+    while (arr1.length < max) {
         let r = Math.floor(Math.random() * (max - min + 1) + min);
-        if(arr1.indexOf(r) === -1) arr1.push(r);
+        if (arr1.indexOf(r) === -1) arr1.push(r);
     }
     const arr2 = [];
-    while(arr2.length < 6){
+    while (arr2.length < max) {
         let r = Math.floor(Math.random() * (max - min + 1) + min);
-        if(arr2.indexOf(r) === -1) arr2.push(r);
+        if (arr2.indexOf(r) === -1) arr2.push(r);
     }
     const pairsOfNumbers = arr1.concat(arr2);
     console.log(pairsOfNumbers);
@@ -133,28 +135,27 @@ function tableRandomNumbers() {
 const scoreEl = document.querySelector('.counter');
 
 let score = 0;
+
 function addScore(points) {
     score += points;
-    scoreEl.innerText = score.toString().padStart(1,'0');
+    scoreEl.innerText = score.toString().padStart(1, '0');
 
 
 }
 
 function removeScore(points) {
     score -= points;
-    scoreEl.innerText = score.toString().padStart(1,'0');
+    scoreEl.innerText = score.toString().padStart(1, '0');
 
 
 }
-
-
 
 
 //drugi argument dla .on
 let card1 = 0;
 let card2 = 0;
 let count = 0;
-$('.game').on('click', '.flip-container', function(){
+$('.game').on('click', '.flip-container', function () {
     if (!$(this).hasClass("hover")) {
         count += 1;
     }
@@ -165,21 +166,21 @@ $('.game').on('click', '.flip-container', function(){
     // console.log($(this).find('.back').find('img').attr('alt'));
     let atrybut = $(this).find('.back').find('img').attr('alt');
 
-    if (count === 1){
+    if (count === 1) {
         card1 = atrybut;
     }
-    if (count === 2 ){
+    if (count === 2) {
         card2 = atrybut;
         this.classList.add('hover');
         // card1 === card2 ? addScore(5) : null;
-        if (card1 === card2){
+        if (card1 === card2) {
             addScore(5);
             count = 0;
             $('.uncovered').fadeOut("slow");
             $('.uncovered').parent().parent().remove();
         }
     }
-    if (count > 2){
+    if (count > 2) {
         $('.flip-container').removeClass('hover');
         $('.flip-container').find('.back').find('img').removeClass('uncovered');
         count = 0;
@@ -187,17 +188,27 @@ $('.game').on('click', '.flip-container', function(){
 
     }
 
-    if ($('.flipper').length < 2){
+    if ($('.flipper').length < 2) {
         $containerGame.empty();
         const $theEnd = $(`
                     <div class="theend">
                     <h1>The End</h1>
                     <h2>Your result: ${score} points</h2>
 </div>
-`)
+`);
 
-        $containerGame.append($theEnd)
-        $(".theend").css("display","block")
+        $containerGame.append($theEnd);
+        $(".theend").css("display", "flex");
+        let playerName = prompt("Please enter your name", "Player");
+        localStorage.setItem('player', playerName);
+        localStorage.setItem('result', score);
+        const $listResults = $(`
+        <ol type="1">
+            <li>Player ${localStorage.getItem('player')} scored ${localStorage.getItem('result')} points</li>   
+        </ol>
+        `)
+        $theEnd.append($listResults)
+
     }
 
 
@@ -205,8 +216,18 @@ $('.game').on('click', '.flip-container', function(){
 
 
 
+$('#easy').click(()=>{
+    NewGame(4)
+})
 
+$('#normal').click(()=>{
+    NewGame(6)
+})
 
+$('#hard').click(()=>{
+    NewGame(8);
+
+})
 
 
 
