@@ -10,12 +10,15 @@
     <title>Memory game</title>
 </head>
 <body>
-<div class="main-container">
-    <header class="header">
-        <div class="title"><h1>Memory game</h1></div>
-    </header>
-    <div class="main">
 
+
+
+<div class="main-container">
+
+    <div class="main">
+        <header class="header">
+            <div class="title"><h1>Memory game</h1></div>
+        </header>
         <div class="main-menu">
             <div class="header-main-menu">
                 <h2>
@@ -55,7 +58,7 @@
                 <li><a href="#" id="easy">Easy</a></li>
                 <li><a href="#" id="normal">Normal</a></li>
                 <li><a href="#" id="hard">Hard</a></li>
-                <li><strong class="title-options">Other options</strong> </li>
+                <li><strong class="title-options">Other options</strong></li>
                 <li><a href="#" id="set-cats">Set cats</a></li>
                 <li></li>
             </ul>
@@ -68,6 +71,17 @@
     </footer>
 
 </div>
+<audio id="audioMenu">
+    <source src="./sound/menu.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="audioGood">
+    <source src="./sound/good.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="audioCheck">
+    <source src="./sound/good01.wav" type="audio/wav">
+</audio>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 

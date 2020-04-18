@@ -8,6 +8,8 @@ const $setCats = $('#set-cats')
 const $containerGame = $('.container');
 const $cardList = $('.card-list');
 
+setTimeout(function(){ document.getElementById('audioMenu').play() }, 1600);
+
 
 $exitBtn.click(() => {
     window.open('', '_self', ''); //bug fix
@@ -20,6 +22,7 @@ $optionsBtn.click(() => {
 })
 
 $setCats.click(() => {
+    document.getElementById('audioMenu').pause();
     $('.container').empty();
     $('.options').css("display", "none");
     score = 0;
@@ -29,10 +32,10 @@ $setCats.click(() => {
     $cardList.empty();
     console.log("działa klik");
     scoreEl.innerText = 0;
-
+    $(".theend").css("display", "none")
     $('.main-menu').css("display", "none");
     $('.game').css("display", "block");
-    LosowanieIWklejanie(catTable)
+    LosowanieIWklejanie(catTable,6)
 
 })
 
@@ -72,7 +75,10 @@ function LosowanieIWklejanie(tableZdjec,ilosc) {
                                 <img src="./images/reversecard.jpg" alt="reverse" class="img">
                             </div>
                             <div class="back">
-                                <img src="${tableZdjec[e - 1]}" alt="${e}" class="img">
+                                <div class="img">
+                                    <img src="${tableZdjec[e - 1]}" alt="${e}" id="${i}">
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -84,6 +90,7 @@ function LosowanieIWklejanie(tableZdjec,ilosc) {
 }
 
 function NewGame(level) {
+    document.getElementById('audioMenu').pause();
     $('.container').empty();
     $('.options').css("display", "none");
     score = 0;
@@ -109,7 +116,8 @@ $newGameBtn.click(() => {
 $(".back-btn").click(() => {
     $('.game').css("display", "none");
     $('.main-menu').css("display", "block");
-    $('.options').css("display","none")
+    $('.options').css("display","none");
+    document.getElementById('audioMenu').play()
 
 })
 
@@ -150,13 +158,15 @@ function removeScore(points) {
 
 }
 
-
 //drugi argument dla .on
 let card1 = 0;
 let card2 = 0;
 let count = 0;
+let idCard1 = 0;
+let idCard2 = 0;
 $('.game').on('click', '.flip-container', function () {
     if (!$(this).hasClass("hover")) {
+        document.getElementById('audioCheck').play();
         count += 1;
     }
 
@@ -165,19 +175,22 @@ $('.game').on('click', '.flip-container', function () {
     $(this).find('.back').find('img').addClass('uncovered');
     // console.log($(this).find('.back').find('img').attr('alt'));
     let atrybut = $(this).find('.back').find('img').attr('alt');
-
+    let idImg = $(this).find('.back').find('img').attr('id');
     if (count === 1) {
         card1 = atrybut;
+        idCard1 = idImg;
     }
     if (count === 2) {
         card2 = atrybut;
+        idCard2 = idImg;
         this.classList.add('hover');
         // card1 === card2 ? addScore(5) : null;
-        if (card1 === card2) {
+        if (card1 === card2 && idCard1 !== idCard2) {
             addScore(5);
+            document.getElementById('audioGood').play();
             count = 0;
             $('.uncovered').fadeOut("slow");
-            $('.uncovered').parent().parent().remove();
+            $('.uncovered').parent().parent().parent().remove();
         }
     }
     if (count > 2) {
@@ -200,14 +213,42 @@ $('.game').on('click', '.flip-container', function () {
         $containerGame.append($theEnd);
         $(".theend").css("display", "flex");
         let playerName = prompt("Please enter your name", "Player");
-        localStorage.setItem('player', playerName);
-        localStorage.setItem('result', score);
+        // localStorage.setItem('player', playerName);
+        // localStorage.setItem('result', score);
+        let obj = {
+            player:playerName,
+            result:score
+        };
+        let localResults = localStorage.getItem("results");
+        let results = [];
+        if (localResults && localResults.length){
+            results = JSON.parse(localResults)
+        }
+        results.push(obj);
+        results.sort((a,b)=>{
+          return (b.result - a.result)
+        })
+
+        localStorage.setItem('results',JSON.stringify(results));
+        console.log(results)
         const $listResults = $(`
-        <ol type="1">
-            <li>Player ${localStorage.getItem('player')} scored ${localStorage.getItem('result')} points</li>   
+        <h2>Ranking: </h2>
+        <ol class="lista-ranking">
+               
         </ol>
         `)
         $theEnd.append($listResults)
+        results.map((e,i)=>{
+            const $listElement = $(`
+        <li>
+            ${e.player} . . . . . . . . . . ${e.result} points
+        </li>
+`)
+            $('.lista-ranking').append($listElement)
+        })
+
+
+
 
     }
 
