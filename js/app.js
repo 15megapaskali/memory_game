@@ -1,5 +1,12 @@
 import "../scss/main.scss";
 
+const smalltalk = require('smalltalk');
+
+let today = new Date();
+let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+let time = today.getHours() + ":" + today.getMinutes();
+let dateTime = date + ' ' + time;
+
 const $newGameBtn = $('#new-game-btn');
 const $optionsBtn = $('#options-btn');
 const $exitBtn = $('#exit-btn');
@@ -186,10 +193,10 @@ $('.game').on('click', '.flip-container', function () {
         this.classList.add('hover');
         // card1 === card2 ? addScore(5) : null;
         if (card1 === card2 && idCard1 !== idCard2) {
-            addScore(5);
+            addScore(10);
             document.getElementById('audioGood').play();
             count = 0;
-            $('.uncovered').fadeOut("slow");
+            $('.uncovered').fadeOut("slow",()=>{});
             $('.uncovered').parent().parent().parent().remove();
         }
     }
@@ -212,47 +219,59 @@ $('.game').on('click', '.flip-container', function () {
 
         $containerGame.append($theEnd);
         $(".theend").css("display", "flex");
-        let playerName = prompt("Please enter your name", "Player");
+        // let playerName = prompt("Please enter your name", "Player");
+        smalltalk.prompt('Congratulations! Game complete!', "Please enter your name", "Player")
+            .then((value) => {
+                // console.log(value);
+                // playerName = value;
+                Ranking(value)
+
+            })
+            .catch(() => {
+                console.log('cancel');
+            });
         // localStorage.setItem('player', playerName);
         // localStorage.setItem('result', score);
-        let obj = {
-            player:playerName,
-            result:score
-        };
-        let localResults = localStorage.getItem("results");
-        let results = [];
-        if (localResults && localResults.length){
-            results = JSON.parse(localResults)
-        }
-        results.push(obj);
-        results.sort((a,b)=>{
-          return (b.result - a.result)
-        })
+        function Ranking(playerName) {
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes();
+            let dateTime = date + ' ' + time;
+            let obj = {
+                player:playerName,
+                result:score,
+                date:dateTime
+            };
+            let localResults = localStorage.getItem("results");
+            let results = [];
+            if (localResults && localResults.length){
+                results = JSON.parse(localResults)
+            }
+            results.push(obj);
+            results.sort((a,b)=>{
+                return (b.result - a.result)
+            })
 
-        localStorage.setItem('results',JSON.stringify(results));
-        console.log(results)
-        const $listResults = $(`
+            localStorage.setItem('results',JSON.stringify(results));
+            console.log(results)
+            const $listResults = $(`
         <h2>Ranking: </h2>
         <ol class="lista-ranking">
                
         </ol>
         `)
-        $theEnd.append($listResults)
-        results.map((e,i)=>{
-            const $listElement = $(`
+            $theEnd.append($listResults)
+            results.map((e,i)=>{
+                const $listElement = $(`
         <li>
-            ${e.player} . . . . . . . . . . ${e.result} points
+            ${e.player} . . . ${e.date} . . . ${e.result} points
         </li>
 `)
-            $('.lista-ranking').append($listElement)
-        })
+                $('.lista-ranking').append($listElement)
+            })
 
-
-
-
+        }
     }
-
-
 });
 
 
