@@ -1,3 +1,342 @@
-body{
-  background-color: tomato;
+@import "../css/reset.css";
+@import "../css/bootstrap-grid.css";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Russo+One&display=swap');
+
+$color1: #FFBC42;
+$color2: #D81159;
+$color3: #8F2D56;
+$color4: #218380;
+$fontOpen:'Open Sans', sans-serif;
+$fontRoboto:'Roboto', sans-serif;
+$fontFredoka: 'Fredoka One', cursive;
+$fontRusso: 'Russo One', sans-serif;
+$fontPacifico: 'Pacifico', cursive;
+
+
+@mixin tekst_color {
+  color: $color4;
+  text-shadow: 1px 2px 0px $color3;
+  font-family: $fontOpen;
+  font-weight: bold;
+
 }
+
+body{
+  background-color: $color1;
+  @include tekst_color;
+  height: 100vh;
+
+}
+.main-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  //margin: 0 auto;
+
+
+
+}
+.main{
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  //width: 1024px;
+  //height: 768px;
+  width: 1300px;
+  height: 690px;
+  max-width: 1366px;
+  margin: 10px auto;
+  outline: 5px dotted $color2;
+  //max-height: 100vh;
+}
+
+.main::after{
+  content: "";
+
+  margin: auto;
+
+  background-image: url("../images/doxie-background-pattern_1319-496.jpg");
+  background-size: auto;
+  opacity: 0.5;
+  position: absolute;
+  z-index: -1;
+  height: inherit;
+  width: inherit;
+}
+
+
+.title{
+  display: flex;
+  justify-content: center;
+
+  h1{
+    font-size: 55px;
+    font-weight: bold;
+    margin: 5px;
+    font-family: "Russo One",sans-serif;
+  }
+}
+
+.main-menu{
+  min-width: 600px;
+  min-height: 450px;
+  margin: 0 auto;
+}
+
+
+
+.header-main-menu{
+
+  h2{
+    text-align: center;
+    font-size: 70px;
+    padding: 30px;
+    font-family: "Pacyfico", cursive;
+  }
+}
+.body-main-menu{
+  display: flex;
+  justify-content: center;
+  ul{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    li{
+      text-align: center;
+      margin: 25px;
+      font-size: 50px;
+      a{
+        text-decoration: none;
+        @include tekst_color;
+        font-family: 'Fredoka One', cursive;
+
+      }
+      a:hover{
+        color: $color2;
+        font-size: 52px;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 3px dotted $color2;
+        text-shadow: 2px 3px 0px $color3;
+      }
+    }
+
+  }
+}
+
+//game style
+.back-btn{
+  position: absolute;
+  top: 45px;
+  background-color: $color1; /* Green */
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  outline: 2px dotted $color2;
+  @include tekst_color;
+  transition: 0.3s;
+  cursor: pointer;
+  margin:2px
+
+}
+
+.back-btn:hover{
+  background-color: $color4; /* Green */
+  border: none;
+  padding: 7px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: 2px dotted $color2;
+  @include tekst_color;
+  color: $color1;
+
+}
+
+.game{
+display: none;
+}
+.game-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 840px;
+  height: 580px;
+
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+
+
+.flip-container, .front, .back {
+
+  width: 180px;
+  height: 180px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  position: relative;
+  border: 1px solid $color1;
+  border-radius: 5%;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color1;
+
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+
+
+}
+
+.img{
+  border: 1px solid $color1;
+  border-radius: 5%;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img{
+    width: 100%;
+    max-height: 180px;
+  }
+}
+
+.card-list{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  li{
+
+    margin: 0 10px 5px 10px;
+
+  }
+}
+
+.game-header{
+  left: -210px;
+  position: relative;
+  top: 4px;
+}
+
+.theend{
+  h1{
+    text-align: center;
+    font-size: 60px;
+  }
+  h2{
+    text-align: center;
+    font-size: 50px;
+  }
+}
+
+.options{
+  display: none;
+
+}
+.options-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a{
+    text-align: center;
+    text-decoration: none;
+    color: #218380;
+    text-shadow: 1px 2px 0px #8F2D56;
+    font-weight: bold;
+    font-family: 'Fredoka One', cursive;
+    font-size: 35px;
+    &:hover{
+      color: $color2;
+      font-size: 40px;
+      transition: 0.3s;
+      cursor: pointer;
+      border: 3px dotted $color2;
+      text-shadow: 2px 3px 0px $color3;
+    }
+  }
+}
+
+.title-options{
+  text-align: center;
+  font-size: 40px;
+  margin: 30px;
+  font-family: "Pacyfico", cursive;
+}
+
+.theend{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.points{
+  display: inline-block;
+  font-size: 25px;
+}
+.lista-ranking{
+  list-style-type: decimal;
+  list-style-position: inside;
+  width:  100%;
+  border: 2px dotted $color2;
+  border-radius: 5%;
+    li{
+      font-family: monospace;
+      font-size: 20px;
+      margin: 5px;
+    }
+  }
+
+

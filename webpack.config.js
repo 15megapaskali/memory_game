@@ -2,7 +2,6 @@
 var path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
     devtool: 'eval-source-map',
     watch: true,
@@ -11,13 +10,12 @@ module.exports = {
         main: path.join(__dirname, 'js', 'app.js'),
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: '[name].bundle.js'
+        path: path.join(__dirname, 'dist')
     },
     devServer: {
+        host: "192.168.1.14",
         port: 4500,
         disableHostCheck: true,
-        contentBase: path.join(__dirname, "dist"),
         compress: true,
         historyApiFallback: true
     },
@@ -42,7 +40,7 @@ module.exports = {
                     }
                 }
             }, {
-                test: /\.(png|jpe?g|svg|gif|woff|otf)$/,
+                test: /\.(png|jpe?g|svg|gif|woff|otf|mp3|wave|wav)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
@@ -50,6 +48,10 @@ module.exports = {
                         outputPath: 'images/'
                     }
                 }
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader'
             },
             {
                 test: /\.css$/i,
