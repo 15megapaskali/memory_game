@@ -1,11 +1,13 @@
 import "../scss/main.scss";
 
 const smalltalk = require('smalltalk');
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
-let today = new Date();
-let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-let time = today.getHours() + ":" + today.getMinutes();
-let dateTime = date + ' ' + time;
 
 const $newGameBtn = $('#new-game-btn');
 const $optionsBtn = $('#options-btn');
@@ -234,7 +236,7 @@ $('.game').on('click', '.flip-container', function () {
         // localStorage.setItem('result', score);
         function Ranking(playerName) {
             let today = new Date();
-            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let date = addZero(today.getDate()) + '.' + addZero(today.getMonth() + 1) + '.' + today.getFullYear();
             let time = addZero(today.getHours()) + ":" + addZero(today.getMinutes());
             let dateTime = date + ' ' + time;
             let obj = {
@@ -264,7 +266,7 @@ $('.game').on('click', '.flip-container', function () {
             results.map((e,i)=>{
                 const $listElement = $(`
         <li>
-            ${e.player} --- ${e.date} --- ${e.result} points
+            ${e.player} _____ ${e.date} _____ ${e.result} points
         </li>
 `)
                 $('.lista-ranking').append($listElement)
@@ -290,21 +292,8 @@ $('#hard').click(()=>{
 })
 
 
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
 
-function myFunction() {
-    var d = new Date();
-    var x = document.getElementById("demo");
-    var h = addZero(d.getHours());
-    var m = addZero(d.getMinutes());
-    var s = addZero(d.getSeconds());
-    x.innerHTML = h + ":" + m + ":" + s;
-}
+
 
 
 
