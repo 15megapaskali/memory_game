@@ -2,6 +2,8 @@
 var path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
 module.exports = {
     devtool: 'eval-source-map',
     watch: true,
@@ -40,7 +42,7 @@ module.exports = {
                     }
                 }
             }, {
-                test: /\.(png|jpe?g|svg|gif|woff|otf|mp3|wave|wav)$/,
+                test: /\.(png|jpe?g|svg|gif|woff|otf|mp3|wave|wav|)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
@@ -50,7 +52,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.html$/i,
+                type: 'javascript/auto',
+                test: /\.(json|html)$/,
                 loader: 'html-loader'
             },
             {
@@ -74,6 +77,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'index.html'),
             hash: true
-        })
+        }),
+        
     ]
 }

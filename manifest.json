@@ -1,16 +1,19 @@
 {
     "name": "Dachshund memory game",
     "short_name" : "DMG",
-    "start_url": "index.html?utm_source=homescreen",
-    "scope" : "./",
+    "start_url": "index.html",
+  
     "icons": [
         {
-            "src": "/images/logo.png",
+            "128":"images/logo.png"
+        },
+        {
+            "src": "images/logo.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/images/logo.png",
+            "src": "logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
