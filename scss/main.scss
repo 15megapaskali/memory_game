@@ -13,6 +13,10 @@ $fontFredoka: 'Fredoka One', cursive;
 $fontRusso: 'Russo One', sans-serif;
 $fontPacifico: 'Pacifico', cursive;
 
+strong{
+  font-weight: bold;
+}
+
 html{
   font-size: 2.5vh;
   }
@@ -344,18 +348,29 @@ body{
   margin: 2%;
 }
 .lista-ranking{
-  list-style-type: decimal;
-  list-style-position: inside;
+  display: block;
+  // list-style-type: decimal;
+  // list-style-position: inside;
   width:  100%;
   border: 2px dotted $color2;
   border-radius: 5%;
   background-color: bisque;
-    li{
+  tr{
+    display: table-row;
+    border: 1px dotted $color1;
+    td {
+      padding: 1%;
+      text-align: center;
+      vertical-align: middle;
+
+
       font-family: monospace;
       text-shadow: none;
       font-size: 1rem;
-      margin: 7px;
+     
     }
+  }
+ 
   }
 
 
@@ -488,7 +503,7 @@ body{
   
 }
 .lista-ranking{
-  li{
+  tr{
     font-size: 1em;
   }
 }

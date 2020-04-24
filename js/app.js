@@ -3,7 +3,7 @@ import "../scss/main.scss";
 const smalltalk = require('smalltalk');
 
 let today = new Date();
-let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+let date = today.getFullYear().toString().substr(-2) + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 let time = today.getHours() + ":" + today.getMinutes();
 let dateTime = date + ' ' + time;
 
@@ -279,17 +279,24 @@ function Ranking(playerName,difflvl) {
     localStorage.setItem('results',JSON.stringify(results));
     console.log(results)
     const $listResults = $(`
-            <h2>Ranking: </h2>
-            <ol class="lista-ranking">
-                
-            </ol>
-                `)
+    <h2>Ranking: </h2>
+        <table class="lista-ranking">
+            
+
+        </table>      
+`)
     $('.ranking').append($listResults)
     results.map((e,i)=>{
         const $listElement = $(`
-        <li>
-        [${e.player}]...[${e.date}]...[lvl ${e.lvl}]......[${e.result} points]
-    </li>
+       
+            <tr>
+                <td>${i+1}. </td>
+                <td><strong> ${e.player}</strong></td>
+                <td>lvl: ${e.lvl} </td>
+                <td>date: ${e.date} </td>
+                <td>result: <strong>${e.result}</strong> </td>
+            </tr>
+       
 `)
         $('.lista-ranking').append($listElement)
     })
@@ -313,17 +320,24 @@ function showRanking(){
     console.log(results);
     
     const $listResults = $(`
-<h2>Ranking: </h2>
-<ol class="lista-ranking">
-       
-</ol>
+    <h2>Ranking: </h2>
+        <table class="lista-ranking">
+            
+
+        </table>      
 `)
     $('.ranking').append($listResults)
     results.map((e,i)=>{
         const $listElement = $(`
-        <li>
-        [${e.player}]...[${e.date}]...[lvl ${e.lvl}]......[${e.result} points]
-    </li>
+       
+            <tr>
+                <td>${i+1}. </td>
+                <td><strong> ${e.player}</strong></td>
+                <td>lvl: ${e.lvl} </td>
+                <td>date: ${e.date} </td>
+                <td>result: <strong>${e.result}</strong> </td>
+            </tr>
+       
 `)
         $('.lista-ranking').append($listElement)
     })
