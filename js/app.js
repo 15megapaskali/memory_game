@@ -232,47 +232,54 @@ $('.game').on('click', '.flip-container', function () {
             });
         // localStorage.setItem('player', playerName);
         // localStorage.setItem('result', score);
-        function Ranking(playerName) {
-            let today = new Date();
-            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            let time = today.getHours() + ":" + today.getMinutes();
-            let dateTime = date + ' ' + time;
-            let obj = {
-                player:playerName,
-                result:score,
-                date:dateTime
-            };
-            let localResults = localStorage.getItem("results");
-            let results = [];
-            if (localResults && localResults.length){
-                results = JSON.parse(localResults)
-            }
-            results.push(obj);
-            results.sort((a,b)=>{
-                return (b.result - a.result)
-            })
-
-            localStorage.setItem('results',JSON.stringify(results));
-            console.log(results)
-            const $listResults = $(`
-        <h2>Ranking: </h2>
-        <ol class="lista-ranking">
-               
-        </ol>
-        `)
-            $theEnd.append($listResults)
-            results.map((e,i)=>{
-                const $listElement = $(`
-        <li>
-            ${e.player} . . . ${e.date} . . . ${e.result} points
-        </li>
-`)
-                $('.lista-ranking').append($listElement)
-            })
-
-        }
+        Ranking(playerName)
     }
 });
+
+
+function Ranking(playerName) {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes();
+    let dateTime = date + ' ' + time;
+    let obj = {
+        player:playerName,
+        result:score,
+        date:dateTime
+    };
+    let localResults = localStorage.getItem("results");
+    let results = [];
+    if (localResults && localResults.length){
+        results = JSON.parse(localResults)
+    }
+    results.push(obj);
+    results.sort((a,b)=>{
+        return (b.result - a.result)
+    })
+
+    localStorage.setItem('results',JSON.stringify(results));
+    console.log(results)
+    const $listResults = $(`
+<h2>Ranking: </h2>
+<ol class="lista-ranking">
+       
+</ol>
+`)
+    // $theEnd.append($listResults)
+    results.map((e,i)=>{
+        const $listElement = $(`
+<li>
+    ${e.player} . . . ${e.date} . . . ${e.result} points
+</li>
+`)
+        $('.lista-ranking').append($listElement)
+    })
+
+}
+
+function showRanking(){
+
+}
 
 
 
@@ -289,8 +296,14 @@ $('#hard').click(()=>{
 
 })
 
+$('#results').click(()=>{
 
+    Ranking()
+})
 
+$(".mute").click(()=>{
+    document.getElementById('audioMenu').pause();
+})
 
 
 

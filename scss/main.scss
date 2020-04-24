@@ -13,10 +13,13 @@ $fontFredoka: 'Fredoka One', cursive;
 $fontRusso: 'Russo One', sans-serif;
 $fontPacifico: 'Pacifico', cursive;
 
+html{
+  font-size: 2.5vh;
+}
 
 @mixin tekst_color {
   color: $color4;
-  text-shadow: 1px 2px 0px $color3;
+  text-shadow: 1px 1px 0px $color3;
   font-family: $fontOpen;
   font-weight: bold;
 
@@ -59,9 +62,11 @@ body{
 .title{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   h1{
-    font-size: 55px;
+    font-size: 3.5rem;
     font-weight: bold;
     margin: 5px;
     font-family: "Russo One",sans-serif;
@@ -74,13 +79,19 @@ body{
   margin: 0 auto;
 }
 
-
+.mute{
+  height: 25px;
+  width: 25px;
+  margin: 3px;
+  cursor: pointer;
+  
+}
 
 .header-main-menu{
 
   h2{
     text-align: center;
-    font-size: 70px;
+    font-size: 3rem;
     padding: 30px;
     font-family: "Pacyfico", cursive;
   }
@@ -95,7 +106,7 @@ body{
     li{
       text-align: center;
       margin: 25px;
-      font-size: 50px;
+      font-size: 2rem;
       a{
         text-decoration: none;
         @include tekst_color;
@@ -104,7 +115,7 @@ body{
       }
       a:hover{
         color: $color2;
-        font-size: 52px;
+        font-size: 2.2rem;
         transition: 0.3s;
         cursor: pointer;
         border: 3px dotted $color2;
@@ -118,7 +129,7 @@ body{
 //game style
 .back-btn{
   position: absolute;
-  top: 45px;
+  top: 3.5vh;
   background-color: $color1; /* Green */
   border: none;
   padding: 5px 10px;
@@ -197,8 +208,7 @@ display: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $color1;
-
+  
 }
 
 /* hide back of pane during swap */
@@ -220,6 +230,8 @@ display: none;
 /* back, initially hidden pane */
 .back {
   transform: rotateY(180deg);
+  background-color: $color1;
+
 
 
 }
@@ -311,7 +323,7 @@ display: none;
 
 .points{
   display: inline-block;
-  font-size: 25px;
+  font-size: 1rem;
 }
 .lista-ranking{
   list-style-type: decimal;
@@ -321,6 +333,7 @@ display: none;
   border-radius: 5%;
     li{
       font-family: monospace;
+      text-shadow: none;
       font-size: 20px;
       margin: 5px;
     }
@@ -329,7 +342,7 @@ display: none;
 //RWD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 768px) {
     /* start of phone styles */
 
     $mobileCardSize : 22vw;
@@ -349,7 +362,7 @@ display: none;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 30%;
+        margin-top: 15%;
         li{
 
           margin: 10px;
@@ -372,7 +385,7 @@ display: none;
 
         h1{
           text-align: center;
-          font-size: 43px;
+          font-size: 3rem;
         }
       }
       .main-menu{
@@ -403,7 +416,7 @@ display: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $color1;
+      // background-color: $color1;
     
     }
 
@@ -447,6 +460,3 @@ display: none;
 
 
     }
-.back-btn{
-  top:-50px
-}

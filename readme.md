@@ -32,6 +32,7 @@ The following technologies were used in the games:
 2. [electron-package](https://github.com/electron/electron-packager)
 3. SCSS / sass
 4. jQuery
+5. RWD
 
 everything packed with a webpack.
 

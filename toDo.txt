@@ -1,0 +1,5 @@
+1. wielkość czcionki w wynikach
+2. link do wyników
+3. wyłączanie dźwięku
+4. przełączenie do wyników - przycisk results
+
