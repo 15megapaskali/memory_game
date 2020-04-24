@@ -15,7 +15,7 @@ $fontPacifico: 'Pacifico', cursive;
 
 html{
   font-size: 2.5vh;
-}
+  }
 
 @mixin tekst_color {
   color: $color4;
@@ -70,6 +70,7 @@ body{
     font-weight: bold;
     margin: 5px;
     font-family: "Russo One",sans-serif;
+    text-align: center;
   }
 }
 
@@ -77,6 +78,12 @@ body{
   // min-width: 600px;
   // min-height: 450px;
   margin: 0 auto;
+}
+
+.klikacze{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .mute{
@@ -105,7 +112,7 @@ body{
     flex-direction: column;
     li{
       text-align: center;
-      margin: 25px;
+      margin: 3vh;
       font-size: 2rem;
       a{
         text-decoration: none;
@@ -128,15 +135,14 @@ body{
 
 //game style
 .back-btn{
-  position: absolute;
-  top: 3.5vh;
+  visibility: hidden;
   background-color: $color1; /* Green */
   border: none;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
+  font-size: 0.9rem;
   outline: 2px dotted $color2;
   @include tekst_color;
   transition: 0.3s;
@@ -152,7 +158,7 @@ body{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1rem;
   outline: 2px dotted $color2;
   @include tekst_color;
   color: $color1;
@@ -176,6 +182,9 @@ display: none;
   justify-content: center;
   align-items: center;
 }
+
+
+
 
 
 /* entire container, keeps perspective */
@@ -288,6 +297,10 @@ display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  li{
+    margin: 3vh;
+    font-size: 2rem;
+  }
   a{
     text-align: center;
     text-decoration: none;
@@ -295,10 +308,10 @@ display: none;
     text-shadow: 1px 2px 0px #8F2D56;
     font-weight: bold;
     font-family: 'Fredoka One', cursive;
-    font-size: 35px;
+    // font-size: 35px;
     &:hover{
       color: $color2;
-      font-size: 40px;
+      font-size: 2.2rem;
       transition: 0.3s;
       cursor: pointer;
       border: 3px dotted $color2;
@@ -309,8 +322,8 @@ display: none;
 
 .title-options{
   text-align: center;
-  font-size: 40px;
-  margin: 30px;
+  font-size: 3rem;
+  margin: 3vh;
   font-family: "Pacyfico", cursive;
 }
 
@@ -338,6 +351,12 @@ display: none;
       margin: 5px;
     }
   }
+
+
+
+.ranking{
+  display: none;
+}
 
 //RWD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

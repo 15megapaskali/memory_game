@@ -26,6 +26,7 @@ $exitBtn.click(() => {
 $optionsBtn.click(() => {
     $('.main-menu').css("display", "none");
     $('.options').css("display", "block");
+    $('.back-btn').css("visibility","visible");
 })
 
 $setCats.click(() => {
@@ -100,6 +101,7 @@ function NewGame(level) {
     document.getElementById('audioMenu').pause();
     $('.container').empty();
     $('.options').css("display", "none");
+    
     score = 0;
     count = 0;
     const $ul = $(`<ul class="card-list"></ul>`)
@@ -110,6 +112,7 @@ function NewGame(level) {
     $(".theend").css("display", "none")
     $('.main-menu').css("display", "none");
     $('.game').css("display", "block");
+    $('.back-btn').css("visibility","visible");
     LosowanieIWklejanie(dogsTable,level)
 }
 
@@ -124,6 +127,8 @@ $(".back-btn").click(() => {
     $('.game').css("display", "none");
     $('.main-menu').css("display", "block");
     $('.options').css("display","none");
+    $('.back-btn').css("visibility","hidden");
+    $('.ranking').css("display", "none");
     document.getElementById('audioMenu').play()
 
 })
@@ -265,7 +270,7 @@ function Ranking(playerName) {
        
 </ol>
 `)
-    // $theEnd.append($listResults)
+    $theEnd.append($listResults)
     results.map((e,i)=>{
         const $listElement = $(`
 <li>
@@ -278,6 +283,40 @@ function Ranking(playerName) {
 }
 
 function showRanking(){
+    $containerGame.empty();
+    $('.back-btn').css("visibility","visible");
+    let localResults = localStorage.getItem("results");
+    let results = [];
+    if (localResults && localResults.length){
+        results = JSON.parse(localResults)
+    }
+   
+    results.sort((a,b)=>{
+        return (b.result - a.result)
+    })
+
+    localStorage.setItem('results',JSON.stringify(results));
+    console.log(results);
+    
+    const $listResults = $(`
+<h2>Ranking: </h2>
+<ol class="lista-ranking">
+       
+</ol>
+`)
+    $containerGame.append($listResults)
+    results.map((e,i)=>{
+        const $listElement = $(`
+<li>
+    ${e.player} . . . ${e.date} . . . ${e.result} points
+</li>
+`)
+        $('.lista-ranking').append($listElement)
+    })
+
+
+    $('.main-menu').css("display", "none");
+    $('.ranking').css("display", "block");
 
 }
 
@@ -296,9 +335,8 @@ $('#hard').click(()=>{
 
 })
 
-$('#results').click(()=>{
-
-    Ranking()
+$('#ranking').click(()=>{
+    showRanking()
 })
 
 $(".mute").click(()=>{
