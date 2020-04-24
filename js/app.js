@@ -16,7 +16,7 @@ const $containerGame = $('.container');
 const $cardList = $('.card-list');
 
 setTimeout(function(){ document.getElementById('audioMenu').play() }, 1600);
-
+let difflvl = "";
 
 $exitBtn.click(() => {
     window.open('', '_self', ''); //bug fix
@@ -101,7 +101,7 @@ function NewGame(level) {
     document.getElementById('audioMenu').pause();
     $('.container').empty();
     $('.options').css("display", "none");
-    
+    $('.game').css("display", "block");
     score = 0;
     count = 0;
     const $ul = $(`<ul class="card-list"></ul>`)
@@ -114,6 +114,16 @@ function NewGame(level) {
     $('.game').css("display", "block");
     $('.back-btn').css("visibility","visible");
     LosowanieIWklejanie(dogsTable,level)
+   
+    if (level === 4){
+        difflvl = "easy"
+    }
+    else if(level ===6){
+        difflvl = "normal"
+    }
+    else if(level ===8){
+        difflvl = "hard"
+    }
 }
 
 
@@ -129,8 +139,9 @@ $(".back-btn").click(() => {
     $('.options').css("display","none");
     $('.back-btn').css("visibility","hidden");
     $('.ranking').css("display", "none");
+    $('.ranking').empty();
     document.getElementById('audioMenu').play()
-
+    
 })
 
 
@@ -229,7 +240,7 @@ $('.game').on('click', '.flip-container', function () {
             .then((value) => {
                 // console.log(value);
                 // playerName = value;
-                Ranking(value)
+                Ranking(value,difflvl)
 
             })
             .catch(() => {
@@ -237,12 +248,14 @@ $('.game').on('click', '.flip-container', function () {
             });
         // localStorage.setItem('player', playerName);
         // localStorage.setItem('result', score);
-        Ranking(playerName)
+        // Ranking(playerName)
     }
 });
 
 
-function Ranking(playerName) {
+function Ranking(playerName,difflvl) {
+    $('.ranking').css("display","block");
+    $('.ranking').empty();
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
@@ -250,7 +263,8 @@ function Ranking(playerName) {
     let obj = {
         player:playerName,
         result:score,
-        date:dateTime
+        date:dateTime,
+        lvl:difflvl
     };
     let localResults = localStorage.getItem("results");
     let results = [];
@@ -265,21 +279,21 @@ function Ranking(playerName) {
     localStorage.setItem('results',JSON.stringify(results));
     console.log(results)
     const $listResults = $(`
-<h2>Ranking: </h2>
-<ol class="lista-ranking">
-       
-</ol>
-`)
-    $theEnd.append($listResults)
+            <h2>Ranking: </h2>
+            <ol class="lista-ranking">
+                
+            </ol>
+                `)
+    $('.ranking').append($listResults)
     results.map((e,i)=>{
         const $listElement = $(`
-<li>
-    ${e.player} . . . ${e.date} . . . ${e.result} points
-</li>
+        <li>
+        [${e.player}]...[${e.date}]...[lvl ${e.lvl}]......[${e.result} points]
+    </li>
 `)
         $('.lista-ranking').append($listElement)
     })
-
+    
 }
 
 function showRanking(){
@@ -304,12 +318,12 @@ function showRanking(){
        
 </ol>
 `)
-    $containerGame.append($listResults)
+    $('.ranking').append($listResults)
     results.map((e,i)=>{
         const $listElement = $(`
-<li>
-    ${e.player} . . . ${e.date} . . . ${e.result} points
-</li>
+        <li>
+        [${e.player}]...[${e.date}]...[lvl ${e.lvl}]......[${e.result} points]
+    </li>
 `)
         $('.lista-ranking').append($listElement)
     })
@@ -324,15 +338,17 @@ function showRanking(){
 
 $('#easy').click(()=>{
     NewGame(4)
+    console.log(difflvl)
 })
 
 $('#normal').click(()=>{
     NewGame(6)
+    console.log(difflvl)
 })
 
 $('#hard').click(()=>{
     NewGame(8);
-
+    console.log(difflvl)
 })
 
 $('#ranking').click(()=>{
