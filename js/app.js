@@ -15,7 +15,7 @@ const $setCats = $('#set-cats')
 const $containerGame = $('.container');
 const $cardList = $('.card-list');
 
-setTimeout(function(){ document.getElementById('audioMenu').play() }, 1600);
+setTimeout(function(){ document.getElementById('audioMenu').play() }, 1800);
 let difflvl = "";
 
 $exitBtn.click(() => {
@@ -80,7 +80,7 @@ function LosowanieIWklejanie(tableZdjec,ilosc) {
             <div class="flip-container">
                         <div class="flipper">
                             <div class="front">
-                                <img src="./images/reversecard.jpg" alt="reverse" class="img">
+                                <img src="./images/tlo.jpg" alt="reverse" class="img">
                             </div>
                             <div class="back">
                                 <div class="img">
@@ -348,7 +348,7 @@ function showRanking(){
 
 }
 
-
+const menuMusic = document.getElementById('audioMenu');
 
 $('#easy').click(()=>{
     NewGame(4)
@@ -362,6 +362,7 @@ $('#normal').click(()=>{
 
 $('#hard').click(()=>{
     NewGame(8);
+    
     console.log(difflvl)
 })
 
@@ -370,8 +371,18 @@ $('#ranking').click(()=>{
 })
 
 $(".mute").click(()=>{
-    document.getElementById('audioMenu').pause();
+    if (menuMusic.paused){
+        menuMusic.play();
+        
+    }
+    else {
+        menuMusic.pause();
+        
+    }
+
+    
 })
+
 
 
 
