@@ -15,12 +15,15 @@ const $setCats = $('#set-cats')
 const $containerGame = $('.container');
 const $cardList = $('.card-list');
 
-setTimeout(function(){ document.getElementById('audioMenu').play() }, 1800);
+$(window).on('load',function() { document.getElementById('audioMenu').play() })
+
+// setTimeout(function(){ document.getElementById('audioMenu').play() }, 1800);
 let difflvl = "";
 
 $exitBtn.click(() => {
     window.open('', '_self', ''); //bug fix
     window.close();
+    open(location, '_self').close();
 })
 
 $optionsBtn.click(() => {
@@ -78,18 +81,17 @@ function LosowanieIWklejanie(tableZdjec,ilosc) {
         const $card = $(`
         <li>
             <div class="flip-container">
-                        <div class="flipper">
-                            <div class="front">
-                                <img src="./images/tlo.jpg" alt="reverse" class="img">
-                            </div>
-                            <div class="back">
-                                <div class="img">
-                                    <img src="${tableZdjec[e - 1]}" alt="${e}" id="${i}">
-                                </div>
-                                
-                            </div>
+                <div class="flipper">
+                    <div class="front">
+                        <img src="./images/tlo.jpg" alt="reverse" class="img">
+                    </div>
+                    <div class="back">
+                        <div class="img">
+                            <img src="${tableZdjec[e - 1]}" alt="${e}" id="${i}">
                         </div>
                     </div>
+                </div>
+            </div>
         </li>`)
 
         $('.card-list').append($card)
